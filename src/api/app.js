@@ -13,6 +13,8 @@ const cors = corsMiddleware({
 	origins: ['http://localhost:4200']
 });
 
+const ObjectID = require('mongodb').ObjectID;
+
 server.pre(cors.preflight);
 server.use(cors.actual);
 server.use(restify.plugins.bodyParser({ mapParams: false }));
@@ -25,5 +27,17 @@ server.get('/api/contacts', (req, res) => {
     res.json(response);
   }).catch(error => console.error(error));
 });
+
+server.get('/api/contacts/:id', (req, res) => {
+  connection.then(response => {
+    const objectID = req.params.id;
+    const contactsCollection = response.db(settings.database).collection(settings.collection);
+    return contactsCollection.findOne(ObjectID(objectID));
+  }).then(response => {
+    res.json(response);
+  }).catch(error => console.error(error));
+});
+
+
 
 server.listen(3000, () => console.info("Magic on port 3000"));
