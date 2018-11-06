@@ -2,5 +2,51 @@
 <p>{{data.address}}</p>
 <p>{{data.email}}</p>  -->
 
+<form class="contact-form" class="contact-form">
+	<h1 mat-dialog-title>
+		<mat-form-field class="full" *ngIf="!displayed">
+			<input type="text" matInput disabled value="{{data.name}}" placeholder="Name">
+		</mat-form-field>
 
-<button mat-rasied-button color='primary' (click)='close()'><mat-icon class='mat-24'>close</mat-icon>Close</button>
+		<mat-form-field class="full" *ngIf="displayed">
+			<input type="text" matInput value="{{data.name}}" placeholder="Name" [(ngModel)]="data.name" name = "name">
+		</mat-form-field>
+	</h1>
+
+	<div mat-dialog-content *ngIf="!displayed">
+		<mat-form-field class="full">
+			<input matInput disabled placeholder="Phone Number" value = "{{data.phone}}">
+		</mat-form-field>
+		<mat-form-field class="full">
+			<a href="mailto:{{data.email}}"><input matInput disabled placeholder="Email" value = "{{data.email}}"></a>
+		</mat-form-field>
+		<mat-form-field class="full">
+			<input matInput disabled placeholder="Address" value = "{{data.address}}">
+		</mat-form-field>
+		<mat-form-field class="full">
+			<input matInput disabled placeholder="Company Name" value = "{{data.company}}">
+		</mat-form-field>
+	</div>
+
+	<div mat-dialog-content *ngIf="displayed">
+		<mat-form-field class="full">
+			<input matInput placeholder="Phone Number" value = "{{data.phone}}" [(ngModel)] = "data.phone" name="phone">
+		</mat-form-field>
+		<mat-form-field class="full">
+			<input matInput placeholder="Email" value = "{{data.email}}" [(ngModel)] = "data.email" name="email">
+		</mat-form-field>
+		<mat-form-field class="full">
+			<input matInput placeholder="Address" value = "{{data.address}}" [(ngModel)] = "data.address" name="address" >
+		</mat-form-field>
+		<mat-form-field class="full">
+			<input matInput placeholder="Company Name" value = "{{data.company}}" [(ngModel)] = "data.company" name="company">
+		</mat-form-field>
+	</div>
+
+	<div mat-dialog-actions>
+		<button mat-rasied-button color="accent" (click)="save(data._id,data)" *ngIf="displayed"><mat-icon class="mat-24">save</mat-icon>Save</button>
+		<button mat-rasied-button color="accent" (click)="displayForm()" *ngIf="!displayed"><mat-icon class="mat-24">mode_edit</mat-icon>edit</button>
+		<button mat-rasied-button color="warn" (click)="displayConfirmation(data._id)" *ngIf="!displayed"><mat-icon class="mat-24">delete</mat-icon>Delete</button>
+		<button mat-rasied-button color="primary" (click)="close()"><mat-icon class="mat-24">close</mat-icon>Close</button>
+	</div>
+</form>

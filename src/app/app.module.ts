@@ -9,17 +9,23 @@ import { ContactService } from './contact.service';
 import { FormsModule } from '@angular/forms';
 
 import { MatTableModule, MatButtonModule, MatDialogModule, MatIconModule, MatFormFieldModule
-, MatInputModule } from '@angular/material';
+, MatInputModule, MatSnackBarModule } from '@angular/material';
 import { ContactViewDialogComponent } from './contact-view-dialog/contact-view-dialog.component';
+import { ContactAddComponent } from './contact-add/contact-add.component';
+import { DeleteContactComponent } from './delete-contact/delete-contact.component';
 
 @NgModule({
-  declarations: [ //for modules that are generated 
+  declarations: [ //for components that are generated 
     AppComponent,
     ContactListComponent,
-    ContactViewDialogComponent
+    ContactViewDialogComponent,
+    ContactAddComponent,
+    DeleteContactComponent
   ],
   entryComponents:[ //for dynamically created components
-    ContactViewDialogComponent
+    ContactViewDialogComponent,
+    ContactAddComponent,
+    DeleteContactComponent
   ],
   imports: [
     MatTableModule,
@@ -31,7 +37,8 @@ import { ContactViewDialogComponent } from './contact-view-dialog/contact-view-d
     FormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [ //for services
     ContactService],

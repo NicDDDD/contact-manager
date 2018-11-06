@@ -28,11 +28,42 @@ server.get('/api/contacts', (req, res) => {
   }).catch(error => console.error(error));
 });
 
-server.get('/api/contacts/:id', (req, res) => {
+server.post('/api/contacts', (req, res) => {
   connection.then(response => {
-    const objectID = req.params.id;
+    const contactsCollection = response.db(settings.database).collection(settings.collection);
+    const contact = req.body;
+    return contactsCollection.insertOne(contact);
+  }).then(response => {
+    res.json(response);
+  }).catch(error => console.error(error));
+});
+
+server.get('/api/contacts/:id', (req, res) => {
+  const objectID = req.params.id;
+  connection.then(response => {
     const contactsCollection = response.db(settings.database).collection(settings.collection);
     return contactsCollection.findOne(ObjectID(objectID));
+  }).then(response => {
+    res.json(response);
+  }).catch(error => console.error(error));
+});
+
+server.post('/api/contacts/:id', (req, res) => {
+  const objectID = req.params.id;
+  connection.then(response => {
+    const contactsCollection = response.db(settings.database).collection(settings.collection);
+    const contact = req.body;
+    return contactsCollection.replaceOne({_id: ObjectID(objectID)},contact);
+  }).then(response => {
+    res.json(response);
+  }).catch(error => console.error(error));
+});
+
+server.del('/api/contacts/:id', (req, res) => {
+  const objectID = req.params.id;
+  connection.then(response => {
+    const contactsCollection = response.db(settings.database).collection(settings.collection);
+    return contactsCollection.deleteOne({_id: ObjectID(objectID)});
   }).then(response => {
     res.json(response);
   }).catch(error => console.error(error));

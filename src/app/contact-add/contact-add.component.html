@@ -1,0 +1,31 @@
+<form class="contact-form">
+	<h1 mat-dialog-title>Add a new Contact</h1>
+	<div mat-dialog-content>
+		<mat-form-field class="full">
+			<input matInput placeholder="name" [(ngModel)]="data.name" name="name">
+		</mat-form-field>
+
+		<mat-form-field class="full">
+			<input matInput placeholder="phone" [(ngModel)]="data.phone" name="phone">
+		</mat-form-field>
+
+		<mat-form-field class="full">
+			<input matInput placeholder="email" [(ngModel)]="data.email" name="email">
+		</mat-form-field>
+
+		<mat-form-field class="full">
+			<input matInput placeholder="address" [(ngModel)]="data.address" name="address">
+		</mat-form-field>
+
+		<mat-form-field class="full">
+			<input matInput placeholder="company" [(ngModel)]="data.company" name="company">
+		</mat-form-field>
+	</div>
+
+	<div mat-dialog-actions>
+		<button mat-rasied-button color="warn" (click)="save(data)"><mat-icon class="mat-24">save</mat-icon>Save</button>
+		<button mat-rasied-button color="primary" (click)="close()"><mat-icon class="mat-24">close</mat-icon>Close</button>
+
+	</div>
+
+</form>
